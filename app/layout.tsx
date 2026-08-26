@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Lorenzo Gonçalves - Fullstack Developer",
   description: "Lorenzo Gonçalves is a fullstack developer with experience in building web applications.",
+  
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
