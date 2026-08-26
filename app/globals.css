@@ -33,3 +33,58 @@ body {
   color: var(--foreground);
   font-family: var(--font-bebas), Arial, Helvetica, sans-serif;
 }
+
+.typing_entry {
+  white-space: nowrap;
+  overflow: hidden;
+  height: 1.2em;
+  animation: typing_entry 3s steps(50, end), blink-caret 0.5s step-end infinite;
+}
+
+@keyframes typing_entry {
+  from { width: 0; border-right: 2px solid var(--color-foreground); }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--color-foreground); }
+}
+
+.typing_words{
+  position: relative;
+}
+
+.typing_words:before{
+  content: "";
+  color: var(--color-primary);
+  animation: words 20s infinite;
+}
+
+.typing_words:after{
+  content: "";
+  position: absolute;
+  height: 100%;
+  right: -10px;
+  border-left: 2px solid var(--color-primary);
+  animation: blink .5s infinite, type_words 20s steps(15) infinite;
+  width: calc(100% + 18px);
+  background-color: var(--color-background);
+}
+
+@keyframes type_words{
+  10%, 15%, 30%, 35%, 50%, 55%, 70%, 75%, 90%, 95% { width: 0; }
+  5%, 20%, 25%, 40%, 45%, 60%, 65%, 80%, 85%, 100% { width: calc(100% + 18px); }
+}
+
+@keyframes blink{
+  0% {border-left: 2px solid var(--color-background);}
+}
+
+@keyframes words{
+  0%,20% { content: "FULLSTACK DEVELOPER_"; }
+  21%,40% { content: "FRONTEND DEVELOPER_"; }
+  41%,60% { content: "BACKEND DEVELOPER_"; }
+  61%,80% { content: "UI/UX DESIGNER_"; }
+  81%,100% { content: "SOFTWARE ENGINEER_"; }
+}
