@@ -55,7 +55,7 @@ export default function About() {
                 </motion.h1>
                 <motion.p 
                     variants={info}
-                    className="text-lg max-w-2xl text-gray-600"
+                    className="text-lg max-w-2xl text-accent"
                 >
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem corrupti blanditiis optio nobis odit animi repellat dolores fugiat molestias debitis, aperiam libero unde! Quod possimus hic ratione nam tempore maiores?
                 </motion.p>
