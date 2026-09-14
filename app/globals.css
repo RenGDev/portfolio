@@ -88,3 +88,17 @@ body {
   61%,80% { content: "UI/UX DESIGNER_"; }
   81%,100% { content: "SOFTWARE ENGINEER_"; }
 }
+
+.about-me {
+  padding: 1rem;
+  animation: blink-border 3s infinite;
+}
+
+@keyframes blink-border {
+  from, to {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px var(--color-primary));
+  }
+}
