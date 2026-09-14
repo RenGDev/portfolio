@@ -3,7 +3,9 @@
 
 :root {
   --background: #121312;
-  --foreground: #a67d43;
+  --foreground: #2b1a17;
+  --accent: #e8dcc4;
+  --secondary: #a67d43;
   --primary: #ad0013;
 }
 
@@ -17,6 +19,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --font-bebas: var(--font-bebas-neue);
   --font-mono: var(--font-geist-mono);
 }
@@ -24,13 +28,20 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #121312;
-    --foreground: #a67d43;
+    --foreground: #2b1a17;
+    --secondary: #a67d43;
+    --accent: #e8dcc4;
+    --primary: #ad0013;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--secondary);
   font-family: var(--font-bebas), Arial, Helvetica, sans-serif;
 }
 
@@ -42,13 +53,13 @@ body {
 }
 
 @keyframes typing_entry {
-  from { width: 0; border-right: 2px solid var(--color-foreground); }
+  from { width: 0; border-right: 2px solid var(--color-primary); }
   to { width: 100%; }
 }
 
 @keyframes blink-caret {
   from, to { border-color: transparent; }
-  50% { border-color: var(--color-foreground); }
+  50% { border-color: var(--color-primary); }
 }
 
 .typing_words{
