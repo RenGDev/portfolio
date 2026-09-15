@@ -105,6 +105,10 @@ body {
   animation: blink-border 3s infinite;
 }
 
+.shadow-blink {
+  animation: blink-border 3s infinite;
+}
+
 @keyframes blink-border {
   from, to {
     filter: drop-shadow(0 0 0 transparent);

@@ -39,7 +39,7 @@ export default function Header(){
                     <li className="hover:text-secondary duration-100 text-sm font-bold relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:ease-in after:duration-200 hover:after:w-full"><a href="#hero">HERO</a></li>
                     <li className="hover:text-secondary duration-100 text-sm font-bold relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:ease-in after:duration-200 hover:after:w-full"><a href="#about">ABOUT</a></li>
                     <li className="hover:text-secondary duration-100 text-sm font-bold relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:ease-in after:duration-200 hover:after:w-full"><a href="#projects">PROJECTS</a></li>
-                    <li className="hover:text-secondary duration-100 text-sm font-bold relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:ease-in after:duration-200 hover:after:w-full"><a href="#contato">CONTACT</a></li>
+                    <li className="hover:text-secondary duration-100 text-sm font-bold relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:ease-in after:duration-200 hover:after:w-full"><a href="#contact">CONTACT</a></li>
                     
                 </ul> 
             </nav>
