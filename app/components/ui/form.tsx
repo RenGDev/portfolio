@@ -1,6 +1,8 @@
+"use client";
+
 import { motion } from "motion/react"
 import AnimatedButton from "../utils/AnimatedButton"
-import "dotenv/config";
+
 
 const formContainer = {
     hidden: { opacity: 0, x: 100 },
@@ -19,9 +21,10 @@ const formItem = {
 }
 
 export default function Form(){
+    console.log("action:", process.env.NEXT_PUBLIC_FORM_URL);
     return(
         <motion.form 
-            action={process.env['FORM_URL']} 
+            action={process.env.NEXT_PUBLIC_FORM_URL}
             method="POST" 
             className="flex flex-col justify-between gap-2 p-10 bg-foreground h-full rounded-md shadow-md shadow-primary shadow-blink"
             variants={formContainer}
