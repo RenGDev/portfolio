@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion } from "motion/react";
 
 const container = {
     hidden: {},
@@ -25,27 +24,15 @@ const info = {
 
 export default function About() {
 
-    const ref = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start end", "end start"],
-    });
-
-    
-    const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0], { clamp: false });
-    const y = useTransform(scrollYProgress, [0, 1], [100, -50], { clamp: false });
-    const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1], { clamp: false });
-    const x = useTransform(scrollYProgress, [0, 1], [-100, 0], { clamp: false });
-
     return (
-        <div ref={ref} id="about" className="flex gap-10 items-center justify-center h-screen">
+        <motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} id="about" className="flex flex-col-reverse md:flex-row gap-10 items-center justify-center min-h-screen">
             <motion.div
                 variants={container}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, amount: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
 
-                className="flex flex-col items-center justify-center max-w-3xl"
+                className="flex flex-col items-center justify-center max-w-3xl p-5 md:p-0"
             >
                 <motion.h1
                     variants={title}
@@ -55,23 +42,23 @@ export default function About() {
                 </motion.h1>
                 <motion.p 
                     variants={info}
-                    className="text-lg max-w-2xl text-accent"
+                    className="text-lg max-w-2xl text-accent text-center"
                 >
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem corrupti blanditiis optio nobis odit animi repellat dolores fugiat molestias debitis, aperiam libero unde! Quod possimus hic ratione nam tempore maiores?
                 </motion.p>
             </motion.div>
             <motion.aside
-                style={{ opacity, scale, x }}
+                variants={info}
                 className="flex items-center justify-center">
                 <Image
                     src="/banner_pixel.png"
                     width={450}
                     height={450}
                     alt="Profile Picture"
-                    className="mt-10 drop-shadow-lg drop-shadow-primary about-me"
+                    className="mt-10 w-64 h-64 md:w-[450px] md:h-[450px] drop-shadow-lg drop-shadow-primary about-me"
                 />
 
             </motion.aside>
-        </div>
+        </motion.div>
     )
 }
