@@ -51,7 +51,7 @@ const projects =
 
 export default function Projects(){
 	return(
-		<motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} id="projects" className="flex flex-col px-20 gap-10 justify-center h-screen">
+		<motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} id="projects" className="flex flex-col px-15 md:px-20 gap-10 justify-center mt-10 min-h-screen">
 			<motion.h1 variants={itens} className="border-l-2 border-primary pl-2 text-5xl float-start font-bold mb-4 text-shadow-md text-shadow-primary">
 				Projects
 			</motion.h1>
@@ -61,7 +61,7 @@ export default function Projects(){
 					<motion.div
 						key={index}
 						variants={itens}
-						className="cursor-pointer h-96 bg-foreground rounded-lg shadow-md shadow-primary hover:shadow-lg transition-shadow duration-300"
+						className="cursor-pointer bg-foreground rounded-lg shadow-md shadow-primary hover:shadow-lg transition-shadow duration-300"
 					>
 						<Image 
 							src="/teste.png"

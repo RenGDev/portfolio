@@ -8,7 +8,7 @@ export default function Contact() {
     const [showNext, setShowNext] = useState(false);
     
     return (
-        <div id="contact" className="flex flex-col items-center justify-center h-screen">
+        <div id="contact" className="flex flex-col items-center overflow-hidden justify-center min-h-screen">
   
             <AnimatedText
                 text="Tem um projeto em mente ou quer trocar uma ideia? Manda uma mensagem, respondo o mais rápido possível."
@@ -18,9 +18,9 @@ export default function Contact() {
             
 
             {showNext && (
-                <div className="flex gap-10 py-20 px-32 justify-center w-full h-full">
+                <div className="flex flex-col md:flex-row gap-10 px-9 py-20 md:px-32 justify-center w-full h-full">
                     <Contacts />
-                    <aside className="w-7/12 h-full">
+                    <aside className="md:w-7/12 md:h-full">
                         <Form />
                     </aside>
                 </div>

@@ -21,7 +21,7 @@ export default function Contacts(){
             initial='hidden'
             whileInView='visible'
             viewport={{once: false, amount: 0.2}}
-            className="flex flex-col justify-center w-2/5 gap-4"
+            className="flex flex-col justify-center md:w-2/5 gap-4"
         >
             <motion.h1 variants={contactItem} className="text-secondary text-shadow-primary text-shadow-md text-2xl">Contacts</motion.h1>
             <motion.hr variants={contactItem} className="border-0 h-0.5 bg-primary"/>

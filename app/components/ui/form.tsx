@@ -21,18 +21,17 @@ const formItem = {
 }
 
 export default function Form(){
-    console.log("action:", process.env.NEXT_PUBLIC_FORM_URL);
     return(
         <motion.form 
             action={process.env.NEXT_PUBLIC_FORM_URL}
             method="POST" 
-            className="flex flex-col justify-between gap-2 p-10 bg-foreground h-full rounded-md shadow-md shadow-primary shadow-blink"
+            className="flex flex-col justify-between gap-6 p-10 bg-foreground h-full rounded-md shadow-md shadow-primary shadow-blink"
             variants={formContainer}
             initial="hidden"
             whileInView="visible"
             viewport= {{once: false, amount: 0.2}}
         >
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-col gap-1.5 text-accent">
                     <motion.label className="opacity-75 uppercase text-xs" variants={formItem} htmlFor="name">Name</motion.label>
                     <motion.input variants={formItem} className="bg-background px-2.5 py-3 rounded-md border-[0.5px] border-primary" type="text" name="name" id="name" placeholder="Your Name..." required />
