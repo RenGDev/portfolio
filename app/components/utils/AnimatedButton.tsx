@@ -5,7 +5,7 @@ export default function AnimatedButton({
     variants, 
     text,
     onClick,
-    type
+    type = "button"
 } : {
     className?: string; 
     variants?: Variants; 
@@ -14,9 +14,9 @@ export default function AnimatedButton({
     type?: 'reset' | 'submit' | 'button' | undefined; 
 }){
     return(
-        <motion.button 
+        <motion.button
+		        type={type}
 				variants={variants}
-                type={type}
 				whileHover={{
   				  scale: 1.1,
   				  transition: { duration: 0.1 }
