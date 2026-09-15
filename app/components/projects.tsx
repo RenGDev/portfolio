@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { motion } from "motion/react"
+import AnimatedButton from "./utils/AnimatedButton";
 
 const container = {
 	hidden: {},
@@ -11,11 +12,6 @@ const container = {
 		},
 	}
 }
-
-const title = {
-	hidden: { opacity: 0, x: 100 },
-	visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-};
 
 const grid_projects = {
 	hidden: {},
@@ -55,12 +51,12 @@ const projects =
 
 export default function Projects(){
 	return(
-		<motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 1 }} id="projects" className="flex flex-col px-20 gap-10 justify-center h-screen">
-			<motion.h1 variants={title} className="border-l-2 border-primary pl-2 text-5xl float-start font-bold mb-4 text-shadow-md text-shadow-primary">
+		<motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} id="projects" className="flex flex-col px-20 gap-10 justify-center h-screen">
+			<motion.h1 variants={itens} className="border-l-2 border-primary pl-2 text-5xl float-start font-bold mb-4 text-shadow-md text-shadow-primary">
 				Projects
 			</motion.h1>
 
-			<motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" variants={grid_projects} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 1 }}>
+			<motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" variants={grid_projects} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.3 }}>
 				{projects.slice(0, 3).map((project, index) => (
 					<motion.div
 						key={index}
@@ -92,22 +88,12 @@ export default function Projects(){
 				))}
 			</motion.div>
 
-			<motion.button 
+			<AnimatedButton 
+				className="mx-auto px-6 py-3 bg-primary uppercase font-bold text-white rounded-lg cursor-pointer transition-colors duration-300"
 				variants={itens}
-				whileHover={{
-  				  scale: 1.1,
-  				  transition: { duration: 0.1 }
-  				}}
-				whileTap={{
-  				  scale: 0.95,
-  				  transition: { duration: 0.1 }
-  				}}
-  				transition={{ duration: 0.5 }}
-				className="mx-auto px-6 py-3 bg-primary text-white rounded-lg cursor-pointer transition-colors duration-300"
+				text="See More Projects"
 				onClick={() => window.location.href = "/projects"}
-			>
-				See More Projects &gt;
-			</motion.button>	
+			/>	
 		</motion.div>
 	)
 }
