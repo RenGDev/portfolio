@@ -1,0 +1,1 @@
+export { LOGIN as POST } from "@/controllers/auth"
