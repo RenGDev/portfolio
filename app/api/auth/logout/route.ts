@@ -1,0 +1,1 @@
+export { LOGOUT as POST } from "@/controllers/auth"

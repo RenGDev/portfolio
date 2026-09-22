@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
-import MenuMobile from "./ui/menuMobile";
+import MenuMobile from "@/app/(site)/components/ui/menuMobile";
 
 export default function Header(){
 

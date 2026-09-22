@@ -1,0 +1,1 @@
+export { GET_MANAGER as GET, PUT, DELETE } from "@/controllers/projects"

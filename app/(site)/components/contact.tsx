@@ -1,8 +1,8 @@
 'use client';
 import AnimatedText from "@/app/components/utils/AnimatedText";
 import { useState } from "react";
-import Form from "./ui/form";
-import Contacts from "./ui/contacts";
+import Form from "@/app/(site)/components/ui/form";
+import Contacts from "@/app/(site)/components/ui/contacts";
 
 export default function Contact() {
     const [showNext, setShowNext] = useState(false);
