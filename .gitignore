@@ -13,6 +13,8 @@
 # testing
 /coverage
 
+# Prisma
+/generated
 
 .agents/
 .claude/
