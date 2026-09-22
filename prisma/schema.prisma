@@ -5,7 +5,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -18,8 +18,15 @@ model User{
   last_name String
   username String @unique
   password String
+  git_hub_link String?
+  email String?
+  linkedin_link String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
   is_admin Boolean @default(false)
-  projects Project[] 
+  about_me String?
+  projects Project[]
+  user_techs UserTechs[]
 }
 
 model Project{
@@ -31,14 +38,19 @@ model Project{
   user_id Int
   user User @relation(fields: [user_id], references: [id])
   project_techs ProjectTechs[]
-  link String
+  link String?
+  image_url String?
 }
 
 model Techs{
   id Int @id @default(autoincrement())
   name String
   description String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  image_url String?
   project_techs ProjectTechs[]
+  user_techs UserTechs[]
 }
 
 model ProjectTechs{
@@ -48,4 +60,13 @@ model ProjectTechs{
   techs Techs @relation(fields: [techs_id], references: [id])
 
   @@id([project_id, techs_id])
+}
+
+model UserTechs{
+  user_id Int
+  techs_id Int
+  user User @relation(fields: [user_id], references: [id])
+  techs Techs @relation(fields: [techs_id], references: [id])
+
+  @@id([user_id, techs_id])
 }
