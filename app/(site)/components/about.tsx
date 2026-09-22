@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import { User } from "@/types";
+import { useState, useEffect } from "react";
 
 const container = {
     hidden: {},
@@ -23,6 +25,18 @@ const info = {
 };
 
 export default function About() {
+    const [ user, setUser ] = useState<User>()
+    
+    useEffect(() => {
+        async function fetchUser(){
+            const res = await fetch('/api/users')
+            const json = await res.json()
+
+            setUser(json)
+        }
+
+        fetchUser()
+    }, [])
 
     return (
         <motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} id="about" className="flex flex-col-reverse md:flex-row gap-10 items-center justify-center min-h-screen">
@@ -44,7 +58,7 @@ export default function About() {
                     variants={info}
                     className="text-lg max-w-2xl text-accent text-center"
                 >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem corrupti blanditiis optio nobis odit animi repellat dolores fugiat molestias debitis, aperiam libero unde! Quod possimus hic ratione nam tempore maiores?
+                    {user?.about_me}
                 </motion.p>
             </motion.div>
             <motion.aside

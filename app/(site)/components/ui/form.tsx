@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react"
-import AnimatedButton from "../utils/AnimatedButton"
+import AnimatedButton from "@/app/components/utils/AnimatedButton"
 
 
 const formContainer = {
