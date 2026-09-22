@@ -1,9 +1,10 @@
 import prisma from "@/lib/prisma";
 import { requireAuth } from "@/lib/requireAuth";
 
-type Context = { params: Promise<{ id: string }> };
+type ManagerContext = { params?: Promise<{ id?: string }> }; 
+type IdContext = { params: Promise<{ id: string }> }; 
 
-export async function GET_MANAGER(request: Request, context: Context){
+export async function GET_MANAGER(request: Request, context: ManagerContext){
     const auth = await requireAuth(request)
         
     if(!auth.authorized){
@@ -17,14 +18,17 @@ export async function GET_MANAGER(request: Request, context: Context){
     const how_much_skip = (pagina_atual - 1) * total_per_page;
 
     if(context?.params){
-        const { id } = await context.params
-        const projects = await prisma.project.findUnique({
-            where: { id: Number(id) } 
-        })
+        const { id } = (await context.params) ?? {};
 
-        return projects
-            ? Response.json(projects)
-            : Response.json({ error: "User not found" }, { status: 404 })
+        if(id){
+            const projects = await prisma.project.findUnique({
+                where: { id: Number(id) } 
+            })
+
+            return projects
+                ? Response.json(projects)
+                : Response.json({ error: "User not found" }, { status: 404 })
+        }
     }
 
     const projects = await prisma.project.findMany({
@@ -85,7 +89,7 @@ export async function POST(request: Request){
     return Response.json({ message: "Project created", data: project }, { status: 201 })
 }
 
-export async function PUT(request: Request, { params }: Context){
+export async function PUT(request: Request, { params }: IdContext){
     const auth = await requireAuth(request)
     
     if(!auth.authorized){
@@ -98,7 +102,7 @@ export async function PUT(request: Request, { params }: Context){
     return Response.json({ message: "Project updated", data: project }, { status: 201 })
 }
 
-export async function DELETE(request: Request, { params }: Context){
+export async function DELETE(request: Request, { params }: IdContext){
     const auth = await requireAuth(request)
     
     if(!auth.authorized){
