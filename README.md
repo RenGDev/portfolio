@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+Site pessoal com painel administrativo para gerenciamento de projetos, tecnologias e dados do usuário.
 
-First, run the development server:
+## Funcionalidades
+
+- **Site público** — apresentação, sobre mim, projetos em destaque e contatos
+- **Painel administrativo** (`/manager`) protegido por autenticação:
+  - CRUD completo de projetos
+  - CRUD completo de tecnologias
+  - Gerenciamento dos dados do usuário admin (limitado a 1 por sistema)
+  - Upload de imagens
+  - Listagem paginada com busca
+- **Autenticação** via JWT assinado (`jose`), armazenado em cookie `httpOnly`
+
+## Tecnologias
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Prisma ORM](https://www.prisma.io/) v7
+- [Neon](https://neon.tech/) (PostgreSQL serverless)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Motion](https://motion.dev/) (animações)
+- [Cloudflare R2](https://developers.cloudflare.com/r2/) (armazenamento de arquivos)
+- [jose](https://github.com/panva/jose) (JWT)
+- [bcrypt](https://www.npmjs.com/package/bcrypt) (hash de senhas)
+
+## Rodando localmente
+
+### Pré-requisitos
+
+- Node.js 18+
+- Conta na [Neon](https://neon.tech/) (banco PostgreSQL gratuito)
+- Conta na Cloudflare com bucket R2 configurado
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+```
+
+### 3. Configure as variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```dotenv
+# local - (se quiser rodar em um banco local)
+
+# Neon - pooled (usada pela aplicação em runtime)
+DATABASE_URL="postgresql://usuario:senha@ep-xxxxx-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
+
+# Neon - direta (usada só pelo Prisma CLI para migrations)
+DIRECT_URL="postgresql://usuario:senha@ep-xxxxx.us-east-2.aws.neon.tech/neondb?sslmode=require"
+
+JWT_SECRET="sua_string_secreta_aqui"
+
+R2_ACCOUNT_ID="seu_account_id"
+R2_ACCESS_KEY_ID="sua_access_key"
+R2_SECRET_ACCESS_KEY="sua_secret_key"
+R2_BUCKET_NAME="nome_do_bucket"
+R2_PUBLIC_URL="https://pub-xxxxx.r2.dev"
+```
+
+### 4. Rode as migrations e gere o Prisma Client
+
+```bash
+npx prisma migrate dev
+npx prisma generate
+```
+
+### 5. Crie o usuário administrador
+
+```bash
+npx prisma db seed
+```
+
+> Isso cria o único usuário admin do sistema. Troque a senha padrão definida em `prisma/seed.ts` antes do primeiro login.
+
+### 6. Inicie o servidor de desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000](http://localhost:3000). O painel administrativo fica em `/manager` (login em `/login`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Estrutura do projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├── (site)/           # Páginas públicas do portfolio
+├── api/               # Route Handlers (API REST)
+├── login/             # Tela de login
+└── manager/           # Painel administrativo (protegido)
+controllers/           # Lógica de negócio das rotas de API
+lib/                    # Clientes/helpers (Prisma, R2, JWT, requireAuth)
+prisma/                 # Schema, migrations e seed
+middleware.ts           # Protege as páginas de /manager
+```
 
-## Learn More
+## Autenticação
 
-To learn more about Next.js, take a look at the following resources:
+O painel administrativo é acessível apenas para o usuário admin (limitado a 1 por sistema). O login gera um JWT assinado, armazenado em cookie `httpOnly`. As páginas de `/manager` são protegidas pelo `middleware.ts`; as rotas de API que exigem autenticação usam o helper `requireAuth()`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Sobre o banco (Neon)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O projeto usa duas connection strings: uma **pooled** (`DATABASE_URL`, via PgBouncer) usada pela aplicação em runtime, e uma **direta** (`DIRECT_URL`) usada apenas pelo Prisma CLI para rodar migrations. Essa separação evita esgotar o limite de conexões em ambiente serverless.
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Projeto configurado para deploy na [Vercel](https://vercel.com/). Lembre-se de adicionar todas as variáveis de ambiente (`DATABASE_URL`, `DIRECT_URL`, `JWT_SECRET`, variáveis do R2) no painel do projeto antes do deploy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Licença
+
+Este projeto é de uso pessoal.
