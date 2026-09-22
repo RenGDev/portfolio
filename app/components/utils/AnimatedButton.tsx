@@ -1,3 +1,5 @@
+'use client'
+
 import { motion, Variants } from "motion/react"
 
 export default function AnimatedButton({
@@ -29,7 +31,7 @@ export default function AnimatedButton({
 				className={className}
 				onClick={onClick}
 			>
-				{text} &gt;
+				{text}
 		</motion.button>
     )
 }
