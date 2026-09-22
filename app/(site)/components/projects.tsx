@@ -5,6 +5,7 @@ import { motion } from "motion/react"
 import AnimatedButton from "@/app/components/utils/AnimatedButton";
 import { useEffect, useState } from "react";
 import ProjectCard from "./ui/projectCard";
+import { Project } from "@/types";
 
 const container = {
 	hidden: {},
@@ -31,7 +32,7 @@ const itens = {
 
 export default function Projects(){
 
-	const [ projects, setProjects ] = useState()
+	const [ projects, setProjects ] = useState<Project[]>()
 
 	useEffect(() => {
 		async function fetchProjects(){

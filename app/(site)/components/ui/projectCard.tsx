@@ -1,15 +1,6 @@
+import { Project } from "@/types";
 import { motion, Variants } from "motion/react";
 import Image from "next/image";
-
-interface Project{
-    name: string,
-    description: string,
-    techs?: [{
-        name: string
-    }]
-    link: string
-    image_url: string
-}
 
 export default function ProjectCard({ index, variants, project} : {index: number, variants: Variants, project: Project}){
     return(
@@ -29,9 +20,9 @@ export default function ProjectCard({ index, variants, project} : {index: number
         		<h2 className="text-xl font-semibold mb-2">{project.name}</h2>
         		<p className="opacity-75 mb-4 text-xs">{project.description}</p>
         		<div className="flex flex-wrap gap-4 mb-4">
-        			{project.techs?.map((tech, i) => (
+        			{project.project_techs?.map((tech, i) => (
         				<span key={i} className="text-secondary text-xs uppercase">
-        					{tech.name}
+        					{tech.techs?.name}
         				</span>
         			))}
         		</div>
