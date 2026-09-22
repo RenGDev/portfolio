@@ -51,12 +51,10 @@ npm install
 Crie um arquivo `.env` na raiz do projeto:
 
 ```dotenv
-# local - (se quiser rodar em um banco local)
-
-# Neon - pooled (usada pela aplicação em runtime)
+# Neon — pooled (usada pela aplicação em runtime)
 DATABASE_URL="postgresql://usuario:senha@ep-xxxxx-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
 
-# Neon - direta (usada só pelo Prisma CLI para migrations)
+# Neon — direta (usada só pelo Prisma CLI para migrations)
 DIRECT_URL="postgresql://usuario:senha@ep-xxxxx.us-east-2.aws.neon.tech/neondb?sslmode=require"
 
 JWT_SECRET="sua_string_secreta_aqui"
@@ -67,6 +65,17 @@ R2_SECRET_ACCESS_KEY="sua_secret_key"
 R2_BUCKET_NAME="nome_do_bucket"
 R2_PUBLIC_URL="https://pub-xxxxx.r2.dev"
 ```
+
+#### Alternativa: rodando com PostgreSQL local
+
+Se preferir não depender da Neon durante o desenvolvimento, é possível apontar para um PostgreSQL rodando localmente. Como o `prisma.config.ts` sempre lê `DIRECT_URL` para os comandos do Prisma CLI, defina as duas variáveis apontando para o mesmo banco local (não existe distinção entre conexão pooled/direta fora da Neon):
+
+```dotenv
+DATABASE_URL="postgresql://postgres:sua_senha@localhost:5432/portfolio?schema=public"
+DIRECT_URL="postgresql://postgres:sua_senha@localhost:5432/portfolio?schema=public"
+```
+
+> Lembre-se de ter um banco `portfolio` criado localmente antes de rodar as migrations, e de trocar de volta para as connection strings da Neon antes de fazer deploy (a Vercel não tem acesso a `localhost`).
 
 ### 4. Rode as migrations e gere o Prisma Client
 
@@ -91,7 +100,7 @@ npm run dev
 
 Acesse [http://localhost:3000](http://localhost:3000). O painel administrativo fica em `/manager` (login em `/login`).
 
-## 📁 Estrutura do projeto
+## Estrutura do projeto
 
 ```
 app/
