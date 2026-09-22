@@ -15,7 +15,7 @@ export default function Table(
 ){
     
     function generateTabs() {
-        const tabs = [];
+        const tabs: React.ReactNode[] = [];
         const page = pagination?.page ?? 1;
         const totalPages = pagination?.total_pages ?? 0;
         const delta = 1;
@@ -140,7 +140,7 @@ export default function Table(
                                         Object.entries(item).map(([key, value]) => (
                                             key != 'id' &&
                                                 <td key={key} scope="row" className="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                                                    {value}
+                                                    {String(value)}
                                                 </td>
                                         ))
                                     }
