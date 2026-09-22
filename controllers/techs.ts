@@ -1,7 +1,9 @@
 import prisma from "@/lib/prisma";
 import { requireAuth } from "@/lib/requireAuth";
 
-export async function GET(request: Request, context){
+type Context = { params: Promise<{ id: string }> };
+
+export async function GET(request: Request, context: Context){
     const { searchParams } = new URL(request.url);
 
     const pagina_atual = Number(searchParams.get('page')) || 1
@@ -62,7 +64,7 @@ export async function POST(request: Request){
     return Response.json({ message: "Tech created", data: tech }, { status: 201 })
 }
 
-export async function PUT(request: Request, { params }){
+export async function PUT(request: Request, { params }: Context){
     const auth = await requireAuth(request)
         
     if(!auth.authorized){
@@ -75,7 +77,7 @@ export async function PUT(request: Request, { params }){
     return Response.json({ message: "Tech updated", data: tech }, { status: 201 })
 }
 
-export async function DELETE(request: Request, { params }){
+export async function DELETE(request: Request, { params }: Context){
     const auth = await requireAuth(request)
         
     if(!auth.authorized){
