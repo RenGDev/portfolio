@@ -1,0 +1,1 @@
+export { GET_MANAGER as GET } from '@/controllers/users'
